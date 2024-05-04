@@ -1,7 +1,7 @@
 const express = require('express');
 const pool = require('./db/dbConfig');
-const sequelize = require('./db/sequelize');
-// const routes = require('./routes');
+const sequelize = require('./db/sequalize');
+const routes = require('./routes/index');
 const cors = require('cors');
 
 const app = express();
@@ -36,7 +36,7 @@ const checkDbConnection = async () => {
 };
 
 // Mount the routes
-// app.use('/', routes);
+app.use('/', routes);
 
 // Start the server and check database connection
 const startServer = async () => {

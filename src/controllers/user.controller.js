@@ -1,6 +1,30 @@
 const UserService = require("../services/user.service");
 
 class UserController {
+
+  async createUser(req, res) {
+    const userData = req.body;
+    try {
+      const user = await UserService.createUser(userData);
+      res.status(201).json(user);
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+
+  async loginUser(req, res) {
+    const { email, password } = req.body;
+    try {
+      const user = await UserService.loginUser(email, password);
+      if (!user) {
+        return res.status(401).json({ error: "Invalid email or password" });
+      }
+      res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+
   async getAllUsers(req, res) {
     try {
       const page = Math.max(1, parseInt(req.query.page) || 1);

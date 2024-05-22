@@ -3,10 +3,10 @@ const bcrypt = require('bcrypt');
 
 class UserRepository {
 
-    async createUser(user) {
-        const newUser = await User.create(user);
-        return newUser;
-    }
+    // async createUser(user) {
+    //     const newUser = await User.create(user);
+    //     return newUser;
+    // }
 
     async createUser(user) {
         try {

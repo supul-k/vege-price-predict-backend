@@ -4,6 +4,7 @@ class UserController {
 
   async createUser(req, res) {
     const userData = req.body;
+    console.log('userData', userData);
     try {
       const user = await UserService.createUser(userData);
       res.status(201).json(user);

@@ -15,9 +15,9 @@ class VegetableService {
         return null;
     }
 
-    async predictVegetablePrice(vegetableName, quantity) {
+    async predictVegetablePrice(date) {
         return new Promise((resolve, reject) => {
-            const pythonProcess = spawn('python', ['path/to/predict_vegetable_price.py', vegetableName, quantity]);
+            const pythonProcess = spawn('python', ['path/to/predict_vegetable_price.py', date]);
             
             pythonProcess.stdout.on('data', (data) => {
                 const price = parseFloat(data.toString());

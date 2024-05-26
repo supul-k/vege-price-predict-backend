@@ -27,20 +27,12 @@ class VegetableController {
   }
 
   async predictVegetablePrice(req, res) {
-    const { vegetableName, quantity } = req.body;
-    if (!vegetableName || !quantity) {
-      return res
-        .status(400)
-        .json({ error: "Vegetable name and quantity are required" });
-    }
+    const { date } = req.body;
     try {
-      const price = await VegetableService.predictVegetablePrice(
-        vegetableName,
-        quantity
-      );
+      const price = await VegetableService.predictVegetablePrice(date);
       res.json({ price });
     } catch (error) {
-      return res.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ error: "Internal server error" });
     }
   }
 }

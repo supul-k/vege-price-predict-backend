@@ -21,6 +21,7 @@ class VegetableService {
 
             pythonProcess.stdout.on('data', (data) => {
                 const price = parseFloat(data.toString());
+                console.log(`Predicted price: ${price}`);
                 resolve(price);
             });
 

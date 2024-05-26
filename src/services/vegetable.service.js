@@ -15,17 +15,27 @@ class VegetableService {
         return null;
     }
 
-    async predictVegetablePrice(date) {
+    static predictVegetablePrice(date) {
         return new Promise((resolve, reject) => {
             const pythonProcess = spawn('python', ['path/to/predict_vegetable_price.py', date]);
-            
+
             pythonProcess.stdout.on('data', (data) => {
                 const price = parseFloat(data.toString());
                 resolve(price);
             });
-            
+
             pythonProcess.stderr.on('data', (data) => {
                 reject(new Error(`Error in Python script: ${data.toString()}`));
+            });
+
+            pythonProcess.on('error', (error) => {
+                reject(new Error(`Failed to start Python script: ${error.message}`));
+            });
+
+            pythonProcess.on('close', (code) => {
+                if (code !== 0) {
+                    reject(new Error(`Python script exited with code ${code}`));
+                }
             });
         });
     }

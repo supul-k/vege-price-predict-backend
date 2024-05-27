@@ -15,13 +15,15 @@ class VegetableService {
         return null;
     }
 
-    static predictVegetablePrice(date) {
+    async predictVegetablePrice(date) {
+
+        console.log('Date has recieved', date);
+        
         return new Promise((resolve, reject) => {
-            const pythonProcess = spawn('python', ['path/to/predict_vegetable_price.py', date]);
+            const pythonProcess = spawn('python', ['model.py', date]);
 
             pythonProcess.stdout.on('data', (data) => {
                 const price = parseFloat(data.toString());
-                console.log(`Predicted price: ${price}`);
                 resolve(price);
             });
 

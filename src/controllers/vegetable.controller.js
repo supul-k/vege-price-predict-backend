@@ -27,9 +27,9 @@ class VegetableController {
   }
 
   async predictVegetablePrice(req, res) {
-    const { date } = req.body;
+    const { selectedDate } = req.body;
     try {
-      const price = await VegetableService.predictVegetablePrice(date);
+      const price = await VegetableService.predictVegetablePrice(selectedDate);
       res.json({ price });
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });

@@ -27,7 +27,7 @@ class VegetableService {
             pythonProcess.stdout.on('data', (data) => {
                 output += data.toString();
             });
-    
+            
             pythonProcess.stderr.on('data', (data) => {
                 console.error('Error from Python script:', data.toString());
             });
@@ -40,10 +40,13 @@ class VegetableService {
             pythonProcess.on('close', (code) => {
                 console.log('Python script exited with code:', code);
                 if (code === 0) {
+                    console.log('output is here');
+                    console.log('output is this', output);
                     try {
-                        const parsedData = JSON.parse(output);
-                        console.log('Parsed data:', parsedData);
-                        resolve(parsedData);
+                        // const parsedData = JSON.parse(output);
+                        // console.log('Parsed data:', output);
+                        resolve(output);
+
                     } catch (error) {
                         reject(new Error('Failed to parse JSON data'));
                     }

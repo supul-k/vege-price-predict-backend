@@ -48,17 +48,19 @@ def main(date_input):
 
     for vegetable, forecast in forecasts.items():
         data[vegetable] = [forecast['yhat'][1304+date_input-7],forecast['yhat'][1304+date_input-6],forecast['yhat'][1304+date_input] ]
-
-    return data
+    
+    data_json = json.dumps(data, indent=4)
+    return data_json
 
 if __name__ == "__main__":
 
     date_input = sys.argv[1]
-    
-    print('Date received to Python process', date_input)
+ 
     if len(sys.argv) != 2:
         sys.exit(1)
 
     response = main(date_input)
+
     print(response)
+ 
 
